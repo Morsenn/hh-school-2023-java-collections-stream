@@ -12,9 +12,9 @@ import java.util.List;
 public class Task3 {
 
   public static List<Person> sort(Collection<Person> persons) {
-    Comparator<Person> pComp = Comparator.comparing(Person::getSecondName)
+    Comparator<Person> personComparator = Comparator.comparing(Person::getSecondName)
         .thenComparing(Person::getFirstName)
         .thenComparing(Person::getCreatedAt);
-    return persons.stream().sorted(pComp).toList();
+    return persons.stream().sorted(personComparator).toList();
   }
 }

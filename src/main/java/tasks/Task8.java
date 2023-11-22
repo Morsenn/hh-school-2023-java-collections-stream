@@ -21,9 +21,6 @@ public class Task8 {
   //Использовал toList() как более простой вариант создания списка
   //Изменил условие if на более понятное
   public List<String> getNames(List<Person> persons) {
-    if (persons.isEmpty()) {
-      return Collections.emptyList();
-    }
     return persons.stream().skip(1).map(Person::getFirstName).toList();
   }
 
@@ -46,19 +43,20 @@ public class Task8 {
     return persons.stream().collect(Collectors.toMap(
         Person::getId,
         this::convertPersonToString,
-        (a, b) -> a)
+        (FirstElement, SecondElement) -> FirstElement)
     );
   }
 
   //Уменьшил время работы с O(n * m) до O(n + m)
   //Использовал StreamAPI для сокращения количества кода
   public boolean hasSamePersons(Collection<Person> persons1, Collection<Person> persons2) {
-    return persons2.stream().anyMatch((new HashSet<>(persons1))::contains);
+    Set<Person> persons1Set = new HashSet<>(persons1);
+    return !Collections.disjoint(persons1Set, persons2);
   }
 
   //Не понятно зачем использовать переменную объекта класса для count. Так как она приватная и нет геттеров убрал её
   //Кажется странным передача стрима как аргумента, мы не можем его скопировать (как я поискал в гугле), поэтому приходится его использовать и соответственно изменять
   public long countEven(Stream<Integer> numbers) {
-    return numbers.filter(num -> num % 2 == 0).count();
+    return numbers.filter(number -> number % 2 == 0).count();
   }
 }

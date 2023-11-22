@@ -25,8 +25,8 @@ public class Task1 {
 //линейное время работы
   public List<Person> findOrderedPersons(List<Integer> personIds) {
     Set<Person> persons = personService.findPersons(personIds);
-    Map<Integer, Person> personIDtoPerson = persons.stream()
+    Map<Integer, Person> personIdToPerson = persons.stream()
         .collect(Collectors.toMap(Person::getId, Function.identity()));
-    return personIds.stream().map(personIDtoPerson::get).toList();
+    return personIds.stream().map(personIdToPerson::get).toList();
   }
 }
